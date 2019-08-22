@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
-// const config = require('config');
+const config = require('config');
 
 // @route   GET api/users
 // @desc    Register route
@@ -65,7 +66,23 @@ router.post(
       await user.save();
 
       // Return jwt
-      res.send('User registered');
+      const payload = {
+        user: {
+          // Mongoose has abstraction for MongoDB's _id
+          id: user.id
+        }
+      };
+
+      // Sign jwt
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

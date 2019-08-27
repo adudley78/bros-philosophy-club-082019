@@ -14,7 +14,7 @@ const SparkSchema = new Schema({
     type: String
   },
   avatar: {
-    type: string
+    type: String
   },
   upvotes: [
     {
@@ -38,7 +38,7 @@ const SparkSchema = new Schema({
         type: String
       },
       avatar: {
-        type: string
+        type: String
       },
       date: {
         type: Date,

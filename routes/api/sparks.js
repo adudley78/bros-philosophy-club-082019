@@ -1,9 +1,48 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const auth = require('../../middleware/auth');
+const Spark = require('../../models/Spark');
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
 
 // @route   GET api/sparks
-// @desc    Test route
-// @access  Public (no token required)
-router.get('/', (req, res) => res.send('Sparks route'));
+// @desc    Create a spark
+// @access  Private
+router.post(
+  '/',
+  [
+    auth,
+    [
+      check('text', 'Text is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+
+      const newSpark = new Spark({
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+        user: req.user.id
+      });
+
+      const spark = await newSpark.save();
+
+      res.json(spark);
+    } catch (er) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 module.exports = router;

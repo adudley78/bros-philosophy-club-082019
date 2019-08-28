@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
 // import axios from 'axios';
 
-const Register = () => {
+const Register = props => {
   // Hook in place of constructor syntax
   const [formData, setFormData] = useState({
     name: '',
@@ -19,7 +21,8 @@ const Register = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      // Pass string as a message to action
+      props.setAlert('Passwords do not match', 'danger');
     } else {
       console.log('SUCCESS');
     }
@@ -111,4 +114,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+// Enables access to props.setAlert
+export default connect(
+  null,
+  { setAlert }
+)(Register);

@@ -106,4 +106,30 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/sparks/upvote/:id
+// @desc    Upvote a spark
+// @access  Private
+router.put('/upvote/:id', auth, async (req, res) => {
+  try {
+    const spark = await Spark.findById(req.params.id);
+
+    // Check if spark has already been upvoted by this user
+    if (
+      spark.upvotes.filter(upvote => upvote.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: 'Spark already upvoted' });
+    }
+
+    spark.upvotes.unshift({ user: req.user.id });
+
+    await spark.save();
+
+    res.json(spark.upvotes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

@@ -1,8 +1,15 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from '../actions/types';
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  CLEAR_PROFILE,
+  GET_PROFILES,
+  GET_USERS_SPARKS
+} from '../actions/types';
 
 const initialState = {
   profile: null,
   profiles: [],
+  sparks: [],
   // Add sparks
   loading: true,
   error: {}
@@ -18,6 +25,12 @@ export default function(state = initialState, action) {
         profile: payload,
         loading: false
       };
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: payload,
+        loading: false
+      };
     case PROFILE_ERROR:
       return {
         ...state,
@@ -29,6 +42,12 @@ export default function(state = initialState, action) {
         ...state,
         profile: null,
         // @todo sparks: [],
+        loading: false
+      };
+    case GET_USERS_SPARKS:
+      return {
+        ...state,
+        sparks: payload,
         loading: false
       };
     default:

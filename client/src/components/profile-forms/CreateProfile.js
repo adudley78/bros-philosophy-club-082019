@@ -1,8 +1,10 @@
 import React, { useState, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom'; // withRouter necessary to use history
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createProfile } from '../../actions/profile';
 
-const CreateProfile = props => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     profession: '',
     website: '',
@@ -45,6 +47,11 @@ const CreateProfile = props => {
       [e.target.name]: e.target.value
     });
 
+  const onSubmit = e => {
+    e.preventDefault();
+    createProfile(formData, history);
+  };
+
   return (
     <Fragment>
       {' '}
@@ -54,7 +61,7 @@ const CreateProfile = props => {
         detail as possible to make your profile stand out!
       </p>
       <small>* = required field</small>
-      <form className='form'>
+      <form className='form' onSubmit={e => onSubmit(e)}>
         <div className='form-group'>
           <select name='status' value={status} onChange={e => onChange(e)}>
             <option value='0'>* Select Your Religion</option>
@@ -240,6 +247,12 @@ const CreateProfile = props => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired
+};
 
-export default CreateProfile;
+// Wrapping CreateProfile necessary to enable use of history object
+export default connect(
+  null,
+  { createProfile }
+)(withRouter(CreateProfile));

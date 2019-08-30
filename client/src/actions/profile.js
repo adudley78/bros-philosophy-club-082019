@@ -42,7 +42,9 @@ export const createProfile = (
       payload: res.data
     });
 
-    dispatch(setAlert(edit ? 'Profile Update' : 'Profile Created', 'success'));
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
+
+    // @todo: Add redirect post-update
 
     if (!edit) {
       history.push('/dashboard');

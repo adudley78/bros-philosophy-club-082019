@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Spark = require('../../models/Spark');
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
@@ -147,7 +148,9 @@ router.get('/user/:user_id', async (req, res) => {
 // @access  Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - remove users sparks
+    // @todo - remove users sparks???
+    /* Remove user sparks
+    await Spark.deleteMany({ user.req.user.id }) */
     // Remote profile
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remote user

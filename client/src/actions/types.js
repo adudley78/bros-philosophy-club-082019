@@ -15,3 +15,4 @@ export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_USERS_SPARKS = 'GET_USERS_SPARKS';
 export const GET_SPARKS = 'GET_SPARKS';
 export const SPARK_ERROR = 'SPARK_ERROR';
+export const UPDATE_UPVOTES = 'UPDATE_UPVOTES';

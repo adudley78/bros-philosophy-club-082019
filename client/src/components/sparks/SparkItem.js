@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { addUpvote, removeUpvote } from '../../actions/spark';
 
 const SparkItem = ({
+  addUpvote,
+  removeUpvote,
   auth,
   spark: { _id, text, name, avatar, user, upvotes, comments, date }
 }) => (
@@ -20,11 +23,19 @@ const SparkItem = ({
       <p className='post-date'>
         Posted on <Moment format='MM/DD/YYYY'>{date}</Moment>
       </p>
-      <button type='button' className='btn btn-light'>
+      <button
+        onClick={e => addUpvote(_id)}
+        type='button'
+        className='btn btn-light'
+      >
         <i className='fas fa-thumbs-up' />{' '}
         <span>{upvotes.length > 0 && <span>{upvotes.length}</span>}</span>
       </button>
-      <button type='button' className='btn btn-light'>
+      <button
+        onClick={e => removeUpvote(_id)}
+        type='button'
+        className='btn btn-light'
+      >
         <i className='fas fa-thumbs-down' />
       </button>
       <Link to={`/spark/${_id}`} className='btn btn-primary'>
@@ -53,5 +64,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { addUpvote, removeUpvote }
 )(SparkItem);

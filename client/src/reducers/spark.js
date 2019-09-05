@@ -1,4 +1,4 @@
-import { GET_SPARKS, SPARK_ERROR } from '../actions/types';
+import { GET_SPARKS, SPARK_ERROR, UPDATE_UPVOTES } from '../actions/types';
 
 const initialState = {
   sparks: [],
@@ -21,6 +21,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case UPDATE_UPVOTES:
+      return {
+        ...state,
+        sparks: state.sparks.map(spark =>
+          spark._id === payload.id
+            ? { ...spark, upvotes: payload.upvotes }
+            : spark
+        ),
         loading: false
       };
     default:

@@ -13,3 +13,5 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_USERS_SPARKS = 'GET_USERS_SPARKS';
+export const GET_SPARKS = 'GET_SPARKS';
+export const SPARK_ERROR = 'SPARK_ERROR';

@@ -17,3 +17,4 @@ export const GET_SPARKS = 'GET_SPARKS';
 export const SPARK_ERROR = 'SPARK_ERROR';
 export const UPDATE_UPVOTES = 'UPDATE_UPVOTES';
 export const DELETE_SPARK = 'DELETE_SPARK';
+export const ADD_SPARK = 'ADD_SPARK';

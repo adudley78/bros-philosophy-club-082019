@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import SparkItem from './SparkItem';
+import SparkForm from './SparkForm';
 import { getSparks } from '../../actions/spark';
 
 const Sparks = ({ getSparks, spark: { sparks, loading } }) => {
@@ -18,7 +19,7 @@ const Sparks = ({ getSparks, spark: { sparks, loading } }) => {
       <p className='lead'>
         <i className='fas fa-user' /> Welcome to the community
       </p>
-      {/* PostForm */}
+      <SparkForm />
       <div className='posts'>
         {sparks.map(spark => (
           <SparkItem key={spark._id} spark={spark} />

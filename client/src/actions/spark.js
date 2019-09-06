@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_SPARKS, SPARK_ERROR, UPDATE_UPVOTES, DELETE_SPARK } from './types';
+import {
+  GET_SPARKS,
+  SPARK_ERROR,
+  UPDATE_UPVOTES,
+  DELETE_SPARK,
+  ADD_SPARK
+} from './types';
 
 // Get sparks
 export const getSparks = () => async dispatch => {
@@ -64,6 +70,31 @@ export const deleteSpark = sparkId => async dispatch => {
     });
 
     dispatch(setAlert('Spark removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: SPARK_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Add spark
+export const addSpark = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const res = await axios.post('/api/sparks/', formData, config);
+
+    dispatch({
+      type: ADD_SPARK,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Spark created', 'success'));
   } catch (err) {
     dispatch({
       type: SPARK_ERROR,

@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { addUpvote, removeUpvote } from '../../actions/spark';
+import { addUpvote, removeUpvote, deleteSpark } from '../../actions/spark';
 
 const SparkItem = ({
   addUpvote,
   removeUpvote,
+  deleteSpark,
   auth,
   spark: { _id, text, name, avatar, user, upvotes, comments, date }
 }) => (
@@ -45,7 +46,11 @@ const SparkItem = ({
         )}
       </Link>
       {!auth.loading && user === auth.user._id && (
-        <button type='button' className='btn btn-danger'>
+        <button
+          onClick={e => deleteSpark(_id)}
+          type='button'
+          className='btn btn-danger'
+        >
           <i className='fas fa-times' />
         </button>
       )}
@@ -55,7 +60,10 @@ const SparkItem = ({
 
 SparkItem.propTypes = {
   spark: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  addUpvote: PropTypes.func.isRequired,
+  removeUpvote: PropTypes.func.isRequired,
+  deleteSpark: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -64,5 +72,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addUpvote, removeUpvote }
+  { addUpvote, removeUpvote, deleteSpark }
 )(SparkItem);

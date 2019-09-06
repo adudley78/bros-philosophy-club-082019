@@ -1,4 +1,9 @@
-import { GET_SPARKS, SPARK_ERROR, UPDATE_UPVOTES } from '../actions/types';
+import {
+  GET_SPARKS,
+  SPARK_ERROR,
+  UPDATE_UPVOTES,
+  DELETE_SPARK
+} from '../actions/types';
 
 const initialState = {
   sparks: [],
@@ -15,6 +20,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         sparks: payload,
+        loading: false
+      };
+    case DELETE_SPARK:
+      return {
+        ...state,
+        sparks: state.sparks.filter(spark => spark._id !== payload),
         loading: false
       };
     case SPARK_ERROR:

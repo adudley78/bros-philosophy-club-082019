@@ -11,6 +11,7 @@ import EditProfile from './components/profile-forms/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Sparks from './components/sparks/Sparks';
+import Spark from './components/spark/Spark';
 import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
 import { Provider } from 'react-redux';
@@ -54,6 +55,7 @@ const App = () => {
                 component={EditProfile}
               />
               <PrivateRoute exact path='/sparks' component={Sparks} />
+              <PrivateRoute exact path='/sparks/:id' component={Spark} />
             </Switch>
           </section>
         </Fragment>

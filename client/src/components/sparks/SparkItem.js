@@ -10,7 +10,8 @@ const SparkItem = ({
   removeUpvote,
   deleteSpark,
   auth,
-  spark: { _id, text, name, avatar, user, upvotes, comments, date }
+  spark: { _id, text, name, avatar, user, upvotes, comments, date },
+  showActions
 }) => (
   <div className='post bg-white p-1 my-1'>
     <div>
@@ -24,39 +25,48 @@ const SparkItem = ({
       <p className='post-date'>
         Posted on <Moment format='MM/DD/YYYY'>{date}</Moment>
       </p>
-      <button
-        onClick={e => addUpvote(_id)}
-        type='button'
-        className='btn btn-light'
-      >
-        <i className='fas fa-thumbs-up' />{' '}
-        <span>{upvotes.length > 0 && <span>{upvotes.length}</span>}</span>
-      </button>
-      <button
-        onClick={e => removeUpvote(_id)}
-        type='button'
-        className='btn btn-light'
-      >
-        <i className='fas fa-thumbs-down' />
-      </button>
-      <Link to={`/spark/${_id}`} className='btn btn-primary'>
-        Discussion{' '}
-        {comments.length > 0 && (
-          <span className='comment-count'>{comments.length}</span>
-        )}
-      </Link>
-      {!auth.loading && user === auth.user._id && (
-        <button
-          onClick={e => deleteSpark(_id)}
-          type='button'
-          className='btn btn-danger'
-        >
-          <i className='fas fa-times' />
-        </button>
+
+      {showActions && (
+        <Fragment>
+          <button
+            onClick={e => addUpvote(_id)}
+            type='button'
+            className='btn btn-light'
+          >
+            <i className='fas fa-thumbs-up' />{' '}
+            <span>{upvotes.length > 0 && <span>{upvotes.length}</span>}</span>
+          </button>
+          <button
+            onClick={e => removeUpvote(_id)}
+            type='button'
+            className='btn btn-light'
+          >
+            <i className='fas fa-thumbs-down' />
+          </button>
+          <Link to={`/sparks/${_id}`} className='btn btn-primary'>
+            Discussion{' '}
+            {comments.length > 0 && (
+              <span className='comment-count'>{comments.length}</span>
+            )}
+          </Link>
+          {!auth.loading && user === auth.user._id && (
+            <button
+              onClick={e => deleteSpark(_id)}
+              type='button'
+              className='btn btn-danger'
+            >
+              <i className='fas fa-times' />
+            </button>
+          )}
+        </Fragment>
       )}
     </div>
   </div>
 );
+
+SparkItem.defaultProps = {
+  showActions: true
+};
 
 SparkItem.propTypes = {
   spark: PropTypes.object.isRequired,

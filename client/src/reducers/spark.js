@@ -3,7 +3,8 @@ import {
   SPARK_ERROR,
   UPDATE_UPVOTES,
   DELETE_SPARK,
-  ADD_SPARK
+  ADD_SPARK,
+  GET_SPARK
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +22,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         sparks: payload,
+        loading: false
+      };
+    case GET_SPARK:
+      return {
+        ...state,
+        spark: payload,
         loading: false
       };
     case ADD_SPARK:

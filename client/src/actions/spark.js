@@ -5,7 +5,8 @@ import {
   SPARK_ERROR,
   UPDATE_UPVOTES,
   DELETE_SPARK,
-  ADD_SPARK
+  ADD_SPARK,
+  GET_SPARK
 } from './types';
 
 // Get sparks
@@ -95,6 +96,23 @@ export const addSpark = formData => async dispatch => {
     });
 
     dispatch(setAlert('Spark created', 'success'));
+  } catch (err) {
+    dispatch({
+      type: SPARK_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get spark
+export const getSpark = sparkId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/sparks/${sparkId}`);
+
+    dispatch({
+      type: GET_SPARK,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: SPARK_ERROR,

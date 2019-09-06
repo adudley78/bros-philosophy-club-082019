@@ -14,6 +14,7 @@ export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_USERS_SPARKS = 'GET_USERS_SPARKS';
 export const GET_SPARKS = 'GET_SPARKS';
+export const GET_SPARK = 'GET_SPARK';
 export const SPARK_ERROR = 'SPARK_ERROR';
 export const UPDATE_UPVOTES = 'UPDATE_UPVOTES';
 export const DELETE_SPARK = 'DELETE_SPARK';

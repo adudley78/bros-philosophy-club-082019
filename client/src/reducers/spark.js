@@ -4,7 +4,9 @@ import {
   UPDATE_UPVOTES,
   DELETE_SPARK,
   ADD_SPARK,
-  GET_SPARK
+  GET_SPARK,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from '../actions/types';
 
 const initialState = {
@@ -56,6 +58,23 @@ export default function(state = initialState, action) {
             ? { ...spark, upvotes: payload.upvotes }
             : spark
         ),
+        loading: false
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        spark: { ...state.spark, comments: payload },
+        loading: false
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        spark: {
+          ...state.spark,
+          comments: state.spark.comments.filter(
+            comment => comment._id !== payload
+          )
+        },
         loading: false
       };
     default:

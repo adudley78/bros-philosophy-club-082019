@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import SparkItem from '../sparks/SparkItem';
+import CommentForm from '../spark/CommentForm';
 import { getSpark } from '../../actions/spark';
 
 const Spark = ({ getSpark, spark: { spark, loading }, match }) => {
@@ -19,6 +20,7 @@ const Spark = ({ getSpark, spark: { spark, loading }, match }) => {
         Back to Sparks
       </Link>
       <SparkItem spark={spark} showActions={false} />
+      <CommentForm sparkId={spark._id} />
     </Fragment>
   );
 };

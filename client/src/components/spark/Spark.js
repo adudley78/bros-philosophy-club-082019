@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import SparkItem from '../sparks/SparkItem';
 import CommentForm from '../spark/CommentForm';
+import CommentItem from '../spark/CommentItem';
 import { getSpark } from '../../actions/spark';
 
 const Spark = ({ getSpark, spark: { spark, loading }, match }) => {
@@ -21,6 +22,15 @@ const Spark = ({ getSpark, spark: { spark, loading }, match }) => {
       </Link>
       <SparkItem spark={spark} showActions={false} />
       <CommentForm sparkId={spark._id} />
+      <div className='comments'>
+        {spark.comments.map(comment => (
+          <CommentItem
+            key={comment._id}
+            comment={comment}
+            sparkId={spark._id}
+          />
+        ))}
+      </div>
     </Fragment>
   );
 };

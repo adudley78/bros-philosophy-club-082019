@@ -51,10 +51,14 @@ router.post(
 
     const {
       // company,
+      status,
+      profession,
       website,
+      blog,
       location,
       bio,
-      status,
+      background,
+      beliefs,
       // skills,
       youtube,
       facebook,
@@ -67,10 +71,14 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     // if (company) profileFields.company = company;
+    if (status) profileFields.status = status;
+    if (profession) profileFields.profession = profession;
     if (website) profileFields.website = website;
+    if (blog) profileFields.blog = blog;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
-    if (status) profileFields.status = status;
+    if (background) profileFields.background = background;
+    if (beliefs) profileFields.beliefs = beliefs;
     // if (skills) {
     //   profileFields.skills = skills.split(',').map(skill => skill.trim());
     // }
@@ -88,10 +96,10 @@ router.post(
 
       if (profile) {
         // Update
-        profile = await Profile.findOneAndUpdate(
+        let profile = await Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
-          { new: true }
+          { new: true, upsert: true }
         );
 
         return res.json(profile);

@@ -5,6 +5,7 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_ERROR,
+  UPDATE_PROFILE,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_USERS_SPARKS
@@ -64,25 +65,7 @@ export const getProfileById = userId => async dispatch => {
   }
 };
 
-// Get sparks by User Id
-export const getSparksByUserId = userId => async dispatch => {
-  try {
-    const res = await axios.get(`/api/sparks/${userId}`);
-
-    dispatch({
-      type: GET_USERS_SPARKS,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
 // Create or update profile
-// Use history object here for redirect
 export const createProfile = (
   formData,
   history,
@@ -103,8 +86,6 @@ export const createProfile = (
     });
 
     dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
-
-    // @todo: Add redirect post-update
 
     if (!edit) {
       history.push('/dashboard');

@@ -6,6 +6,7 @@ import Alert from '../layout/Alert';
 import Dashboard from '../dashboard/Dashboard';
 import CreateProfile from '../profile-forms/CreateProfile';
 import EditProfile from '../profile-forms/EditProfile';
+import About from '../layout/About';
 import Profiles from '../profiles/Profiles';
 import Profile from '../profile/Profile';
 import Sparks from '../sparks/Sparks';
@@ -20,6 +21,7 @@ const Routes = () => {
       <Switch>
         <Route exact path='/register' component={Register} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/about' component={About} />
         <Route exact path='/profiles' component={Profiles} />
         <Route exact path='/profile/:id' component={Profile} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />

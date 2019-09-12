@@ -29,15 +29,15 @@ const SparkItem = ({
       {showActions && (
         <Fragment>
           <button
-            onClick={e => addUpvote(_id)}
+            onClick={() => addUpvote(_id)}
             type='button'
             className='btn btn-light'
           >
             <i className='fas fa-thumbs-up' />{' '}
-            <span>{upvotes.length > 0 && <span>{upvotes.length}</span>}</span>
+            {upvotes.length > 0 && <span>{upvotes.length}</span>}
           </button>
           <button
-            onClick={e => removeUpvote(_id)}
+            onClick={() => removeUpvote(_id)}
             type='button'
             className='btn btn-light'
           >
@@ -51,7 +51,7 @@ const SparkItem = ({
           </Link>
           {!auth.loading && user === auth.user._id && (
             <button
-              onClick={e => deleteSpark(_id)}
+              onClick={() => deleteSpark(_id)}
               type='button'
               className='btn btn-danger'
             >
@@ -73,7 +73,8 @@ SparkItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addUpvote: PropTypes.func.isRequired,
   removeUpvote: PropTypes.func.isRequired,
-  deleteSpark: PropTypes.func.isRequired
+  deleteSpark: PropTypes.func.isRequired,
+  showActions: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

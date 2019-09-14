@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const https = require('https');
 
 const app = express();
 
@@ -30,4 +31,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+https
+  .createServer(app)
+  .listen(PORT, () => console.log(`Server started on port ${PORT}`));

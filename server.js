@@ -1,12 +1,15 @@
+const sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
-const https = require('https');
 
 const app = express();
 
 // Connect Database
 connectDB();
+
+// Enable SSL redirect
+app.use(sslRedirect());
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -31,6 +34,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-https
-  .createServer(app)
-  .listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

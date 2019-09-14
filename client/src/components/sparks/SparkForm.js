@@ -9,7 +9,10 @@ const SparkForm = ({ addSpark }) => {
   return (
     <div className='post-form'>
       <div className='bg-primary p'>
-        <h3>Say Something...</h3>
+        <h3>
+          A Spark is a conversation starter! Post one now to "spark" a
+          conversation.
+        </h3>
       </div>
       <form
         className='form my-1'

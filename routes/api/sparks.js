@@ -38,7 +38,7 @@ router.post(
       const spark = await newSpark.save();
 
       res.json(spark);
-    } catch (er) {
+    } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }

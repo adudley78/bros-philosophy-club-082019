@@ -63,9 +63,10 @@ const CreateProfile = ({ createProfile, history }) => {
       <p>
         Note: For now, if you want a profile photo, create a Gravatar by signing
         up and adding a profile photo at{' '}
-        <Link to='https://en.gravatar.com/' target='_blank'>
+        <a href='https://gravatar.com' target='_blank'>
+          {' '}
           this link{' '}
-        </Link>
+        </a>
         and it will automagically show up on your BPC profile. However, be sure
         to sign up for Gravatar with the same email address that you used to
         sign up for your BPC account or else the magic won't work!

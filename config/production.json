@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://adamdudley:Q06nQBvxAfuQtlTR@bros-philosophy-club-082019-vajjq.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "5CAD9ADA9DDE5A3D72D3F0C9A3D04603FA823F9C16C88BC1E740A72491631CA9"
+}

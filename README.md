@@ -11,3 +11,5 @@ Adam Dudley
 <h2>Version</h2>
 
 1.0.0
+
+<h2>This is just a test</h2>
